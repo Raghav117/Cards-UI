@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,29 +15,230 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cards UI'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const Text(
+              'Find the right product for your money goals',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Flexible(
+              child: GridView.count(
+                crossAxisCount: 2,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return const CreditCardList(title: 'Credit Cards');
+                        }));
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        shadowColor: Colors.black,
+                        elevation: 3,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.lightBlue.withOpacity(0.2)),
+                                child: Image.asset(
+                                  'assets/card.png',
+                                  scale: 0.5,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Credit cards',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return const PersonalLoan(title: 'Personal Loans');
+                        }));
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        shadowColor: Colors.black,
+                        elevation: 3,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.amber.withOpacity(0.2)),
+                                child: Image.asset(
+                                  'assets/loan.png',
+                                  scale: 0.5,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Personal Loan',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return const Banking(title: 'Banking ');
+                        }));
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        shadowColor: Colors.black,
+                        elevation: 3,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.green.withOpacity(0.2)),
+                                child: Image.asset(
+                                  'assets/bank.png',
+                                  scale: 0.5,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Banking',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            InkWell(
+              onTap: (() {
+                launchUrl(Uri.parse('https://fonts.google.com/icons'),
+                    mode: LaunchMode.externalApplication);
+              }),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                shadowColor: Colors.amber,
+                elevation: 3,
+                child: const SizedBox(
+                  height: 30,
+                  width: 200,
+                  child: Center(child: Text('Open Web View')),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CreditCardList extends StatefulWidget {
+  const CreditCardList({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CreditCardList> createState() => _CreditCardListState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _CreditCardListState extends State<CreditCardList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +248,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView(
           children: <Widget>[
-            const Text(
-              'Credit Card Section 1',
-              style: TextStyle(fontSize: 30),
-            ),
             const SizedBox(
               height: 20,
             ),
@@ -81,54 +279,34 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PersonalLoan extends StatefulWidget {
+  const PersonalLoan({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<PersonalLoan> createState() => _PersonalLoanState();
+}
+
+class _PersonalLoanState extends State<PersonalLoan> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: ListView(
+          children: <Widget>[
             const SizedBox(
               height: 30,
-            ),
-            const Text(
-              'Credit Card Section 1',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  ...List.generate(
-                    4,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: CreditCardWidget(
-                        title: 'Cheese Freedom Unlimited',
-                        rating: '5,0',
-                        imageUrl:
-                            'https://img.freepik.com/free-vector/gradient-golden-luxury-horizontal-business-card-template_23-2149025600.jpg?w=2000',
-                        row1Value: '\$0',
-                        row2Value:
-                            '0% intro APR for up to 21 months from account opening on purchases and qualifying',
-                        row3Value: '17.24%-29.34% Variable APR',
-                        recommendCreditScore: '690-850',
-                        row1Title: 'Annual Fee',
-                        row2Title: 'Intro APR',
-                        row3Title: 'Regular APR',
-                        info1: false,
-                        info2: false,
-                      ),
-                    ),
-                  ).toList()
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Text(
-              'Personal Loan',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -155,13 +333,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Text(
-              'Banking',
-              style: TextStyle(fontSize: 30),
-            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Banking extends StatefulWidget {
+  const Banking({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<Banking> createState() => _BankingState();
+}
+
+class _BankingState extends State<Banking> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: ListView(
+          children: <Widget>[
             const SizedBox(
               height: 20,
             ),
@@ -177,7 +374,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: 'Sofi Checking and Savings',
                         rating: '4.5',
                         imageUrl:
-                            'https://img.freepik.com/free-vector/bank-credit-finance-management-loan-agreement-signing-mortgage-money-credit_335657-3136.jpg',
+                            'https://media.istockphoto.com/photos/bank-doorway-picture-id1008926982?b=1&k=20&m=1008926982&s=612x612&w=0&h=Nnt146fD55eb0n5dPe8kWOGIRSmyU3poAFZBvBgWK7w=',
                         row1Value: '7.99-29.99%',
                         row2Value: '\$0',
                         row1Title: 'APY',
@@ -190,9 +387,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ).toList()
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 400,
             ),
           ],
         ),
@@ -242,12 +436,12 @@ class CreditCardWidget extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.80,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(2),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.5,
                   child: Image.network(
@@ -260,13 +454,16 @@ class CreditCardWidget extends StatelessWidget {
               Text(
                 title,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(
+                height: 4,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.star,
-                    size: 30,
+                    size: 20,
                     color: Colors.grey,
                   ),
                   const SizedBox(
@@ -449,11 +646,17 @@ class CreditCardWidget extends StatelessWidget {
               const SizedBox(
                 height: 2,
               ),
-              const Text(
-                'See full details',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              InkWell(
+                onTap: () {
+                  launchUrl(Uri.parse('https://fonts.google.com/icons'),
+                      mode: LaunchMode.externalApplication);
+                },
+                child: const Text(
+                  'See full details',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -510,7 +713,7 @@ class CreditCardWidget extends StatelessWidget {
                   Expanded(
                       child: Container(
                     color: Colors.green,
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'APPLY NOW',
@@ -531,7 +734,7 @@ class CreditCardWidget extends StatelessWidget {
                         border: Border.all(
                       color: Colors.green,
                     )),
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'READ REVIEW',
@@ -591,12 +794,12 @@ class PersonalLoadWidget extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.80,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(2),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.5,
                   child: Image.network(
@@ -609,13 +812,16 @@ class PersonalLoadWidget extends StatelessWidget {
               Text(
                 title,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(
+                height: 4,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.star,
-                    size: 30,
+                    size: 20,
                     color: Colors.grey,
                   ),
                   const SizedBox(
@@ -737,11 +943,17 @@ class PersonalLoadWidget extends StatelessWidget {
               const SizedBox(
                 height: 2,
               ),
-              const Text(
-                'See full details',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              InkWell(
+                onTap: () {
+                  launchUrl(Uri.parse('https://fonts.google.com/icons'),
+                      mode: LaunchMode.externalApplication);
+                },
+                child: const Text(
+                  'See full details',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -755,7 +967,7 @@ class PersonalLoadWidget extends StatelessWidget {
                   Expanded(
                       child: Container(
                     color: Colors.green,
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'GET RATE',
@@ -776,7 +988,7 @@ class PersonalLoadWidget extends StatelessWidget {
                         border: Border.all(
                       color: Colors.green,
                     )),
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'READ REVIEW',
@@ -838,12 +1050,12 @@ class BankingWidget extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.80,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(2),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.5,
                   child: Image.network(
@@ -856,13 +1068,16 @@ class BankingWidget extends StatelessWidget {
               Text(
                 title,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(
+                height: 4,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.star,
-                    size: 30,
+                    size: 20,
                     color: Colors.grey,
                   ),
                   const SizedBox(
@@ -1016,11 +1231,17 @@ class BankingWidget extends StatelessWidget {
               const SizedBox(
                 height: 2,
               ),
-              const Text(
-                'See full details',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              InkWell(
+                onTap: () {
+                  launchUrl(Uri.parse('https://fonts.google.com/icons'),
+                      mode: LaunchMode.externalApplication);
+                },
+                child: const Text(
+                  'See full details',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -1034,7 +1255,7 @@ class BankingWidget extends StatelessWidget {
                   Expanded(
                       child: Container(
                     color: Colors.green,
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'LEARN MORE',
@@ -1055,7 +1276,7 @@ class BankingWidget extends StatelessWidget {
                         border: Border.all(
                       color: Colors.green,
                     )),
-                    height: 60,
+                    height: 50,
                     child: const Center(
                       child: Text(
                         'READ REVIEW',
